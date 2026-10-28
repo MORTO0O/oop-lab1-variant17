@@ -4,9 +4,14 @@
 int** matrix_create(std::size_t rows, std::size_t cols) {
     if (rows == 0 || cols == 0) return nullptr;
 
-    int** matrix = new int*[rows];
-    for (std::size_t i = 0; i < rows; i++){
-        matrix[i] = new int[cols];
+    int** matrix = new int*[rows]{};
+    try {
+        for (std::size_t i = 0; i < rows; i++){
+            matrix[i] = new int[cols]{};
+        }
+    } catch (...) {
+        matrix_delete(matrix, rows);
+        throw;
     }
 
     return matrix;

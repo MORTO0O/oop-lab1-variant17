@@ -31,3 +31,27 @@ target_link_libraries(matrix_tests PRIVATE matrix_ops GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(matrix_tests)
+
+add_test(
+    NAME menu_requires_matrix
+    COMMAND ${CMAKE_COMMAND}
+        -DAPP=$<TARGET_FILE:lab1>
+        -DINPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/menu_requires_matrix.txt
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_menu_requires_matrix.cmake
+)
+
+add_test(
+    NAME menu_roundtrip
+    COMMAND ${CMAKE_COMMAND}
+        -DAPP=$<TARGET_FILE:lab1>
+        -DINPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/menu_roundtrip.txt
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_menu_roundtrip.cmake
+)
+
+add_test(
+    NAME menu_rejects_invalid_dimensions
+    COMMAND ${CMAKE_COMMAND}
+        -DAPP=$<TARGET_FILE:lab1>
+        -DINPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/menu_invalid_dimensions.txt
+        -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_menu_invalid_dimensions.cmake
+)
